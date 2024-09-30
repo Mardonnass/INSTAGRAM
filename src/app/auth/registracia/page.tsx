@@ -7,7 +7,7 @@ export const metadata = {title: "Registracia | Insta"}
 export default function SignUp() {
     return(
         <Container>
-            <Typography> About Me </Typography>
+            <Typography> Registracia </Typography>
         </Container>
     );
 }

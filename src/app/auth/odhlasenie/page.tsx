@@ -7,7 +7,7 @@ export const metadata = {title: "Odhlasenie | Insta"}
 export default function SignOut() {
     return(
         <Container>
-            <Typography> About Me </Typography>
+            <Typography> Odhlasenie </Typography>
         </Container>
     );
 }
