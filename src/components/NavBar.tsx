@@ -1,4 +1,4 @@
-"use client"; // Mark this as a Client Component
+"use client"; // Ensure this is a Client Component
 
 import * as React from 'react';
 import Box from '@mui/material/Box';
