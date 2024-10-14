@@ -35,7 +35,7 @@ export default function Navbar() {
         <BottomNavigationAction label="Profile" icon={<AccountCircleIcon />} />
         <BottomNavigationAction label="Post" icon={<AddBoxIcon />} />
         <BottomNavigationAction label="Sign Up" icon={<PersonAddIcon />} />
-        <BottomNavigationAction label="Log In" icon={<LoginIcon />} />
+        <BottomNavigationAction label="Sign In" icon={<LoginIcon />} />
       </BottomNavigation>
     </Box>
   );
