@@ -1,13 +1,9 @@
-//src/app/(home)/page.tsx
-import Typography  from "@mui/material/Typography";
-import Container from "@mui/material/Container";
+// src/app/auth/odhlasenie/page.tsx
 
-export const metadata = {title: "Odhlasenie | Insta"}
+import SignOutView from "../../../sections/SignOutView";
 
-export default function SignOut() {
-    return(
-        <Container>
-            <Typography> Odhlasenie </Typography>
-        </Container>
-    );
+export const metadata = { title: "Odhlásenie | ZoškaSnap" };
+
+export default function SignOutPage() {
+  return <SignOutView />;
 }

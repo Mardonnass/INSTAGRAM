@@ -1,14 +1,16 @@
-//src/app/(home)/page.tsx
-import Typography  from "@mui/material/Typography";
-import Container from "@mui/material/Container";
+
+// src/app/hladat/page.tsx
 
 
-export const metadata = {title: "Search | Insta"}
+import Typography from "@mui/material/Typography";
+
+export const metadata = { title: "Hľadať | ZoškaSnap" };
 
 export default function Search() {
-    return(
-        <Container>
-            <Typography> Search </Typography>
-        </Container>
-    );
+
+  return (
+
+      <Typography> Hľadať </Typography>
+
+  );
 }

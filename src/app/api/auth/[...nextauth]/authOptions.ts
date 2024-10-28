@@ -11,6 +11,7 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   secret: process.env.NEXTAUTH_SECRET,
+  debug: true, // Enable/disable detailed logging
   pages: {
     signIn: '/auth/prihlasenie',
     signOut: '/auth/odhlasenie',

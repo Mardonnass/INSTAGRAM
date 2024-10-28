@@ -1,19 +1,25 @@
 
+// src/app/page.tsx
 
-import { useSession } from "next-auth/react"; // Import useSession hook
-import AuthHomeView from "@/sections/AuthHomeView"; // Import authorized view
-import NonAuthHomeView from "@/sections/NonAuthHomeView"; // Import unauthorized view
 
-export const metadata = { title: "Domov | ZoskaSnap" };
+import { getServerSession } from "next-auth";
+import { authOptions } from "../api/auth/[...nextauth]/authOptions";
+import AuthHomeView from "../../sections/AuthHomeView";
+import NonAuthHomeView from "../../sections/NonAuthHomeView";
 
-export default function Home() {
-  const { data: session } = useSession(); // Get the session data
+export const metadata = { title: "Domov | ZoškaSnap" };
 
-  if (session) {
-    // If the user is authenticated, render the AuthHomeView
-    return <AuthHomeView />;
-  } else {
-    // If the user is not authenticated, render the NonAuthHomeView
+export default async function HomePage() {
+  try {
+    const session = await getServerSession(authOptions);
+
+    if (!session) {
+      return <NonAuthHomeView />;
+    }
+
+    return <AuthHomeView session={session} />;
+  } catch (error) {
+    console.error("Error fetching session:", error);
     return <NonAuthHomeView />;
   }
 }

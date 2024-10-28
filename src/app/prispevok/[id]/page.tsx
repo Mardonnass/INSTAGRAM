@@ -1,14 +1,26 @@
-//src/app/prispevok/[id]/page.tsx
-import Typography  from "@mui/material/Typography";
+// src/app/prispevok/[prispevokId]/page.tsx
+
+
+import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 
+export const metadata = { title: "Detail prispevku | ZoškaSnap" };
 
-export const metadata = {title: "Detail Prispevkov| Insta"}
+export default function PostDetail({
+  params,
 
-export default function PostDetail() {
-    return(
-        <Container>
-            <Typography> Listing Profilov </Typography>
-        </Container>
-    );
+}: {
+  params: {
+    prispevokId: string;
+  };
+}) {
+
+  return (
+    <Container>
+      <Typography> Príspevok číslo: {params.prispevokId} </Typography>
+    </Container>
+
+      
+
+  );
 }
