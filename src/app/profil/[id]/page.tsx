@@ -1,14 +1,15 @@
-//src/app/prispevok/page.tsx
-import Typography  from "@mui/material/Typography";
-import Container from "@mui/material/Container";
+// src/app/profil/[id]/page.tsx
 
 
-export const metadata = {title: "Detail profilov | Insta"}
+import Typography from "@mui/material/Typography";
+
+export const metadata = { title: "Detail profilu | ZoškaSnap" };
 
 export default function ProfileDetail() {
-    return(
-        <Container>
-            <Typography> Detail Profilov </Typography>
-        </Container>
-    );
+
+  return (
+
+      <Typography> Detail profilu </Typography>
+
+  );
 }

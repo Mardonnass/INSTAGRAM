@@ -1,14 +1,16 @@
+
 // src/app/prispevok/page.tsx
-import Typography  from "@mui/material/Typography";
-import Container from "@mui/material/Container";
 
 
-export const metadata = {title: "Zoznam prispevkov | Insta"}
+import Typography from "@mui/material/Typography";
 
-export default function PostListing() {
-    return(
-        <Container>
-            <Typography> Listing prispevkov </Typography>
-        </Container>
-    );
+export const metadata = { title: "Zoznam prispevkov | ZoškaSnap" };
+
+export default function PostsList() {
+
+  return (
+
+      <Typography> Zoznam prispevkov </Typography>
+
+  );
 }
