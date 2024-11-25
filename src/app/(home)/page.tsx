@@ -7,7 +7,7 @@ import { authOptions } from "../api/auth/[...nextauth]/authOptions";
 import AuthHomeView from "../../sections/AuthHomeView";
 import NonAuthHomeView from "../../sections/NonAuthHomeView";
 
-export const metadata = { title: "Domov | ZoškaSnap" };
+export const metadata = { title: "Domov | INSTAGRAM" };
 
 export default async function HomePage() {
   try {
