@@ -4,7 +4,7 @@
 
 import Typography from "@mui/material/Typography";
 
-export const metadata = { title: "GDPR | ZoškaSnap" };
+export const metadata = { title: "GDPR | INSTAGRAM " };
 
 export default function GDPR() {
 

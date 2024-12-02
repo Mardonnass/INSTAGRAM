@@ -4,7 +4,7 @@
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 
-export const metadata = { title: "Detail prispevku | ZoškaSnap" };
+export const metadata = { title: "Detail prispevku | INSTAGRAM" };
 
 export default function PostDetail({
   params,

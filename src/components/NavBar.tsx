@@ -27,16 +27,20 @@ export default function Navbar() {
   // Non-authenticated navigation paths
   const nonAuthPaths = [
     { label: "Domov", value: "/", icon: <HomeIcon /> },
-    { label: "Prispevky", value: "/prispevok", icon: <AddCircleIcon /> },
     { label: "Registrácia", value: "/auth/registracia", icon: <AppRegistrationIcon /> },
-    { label: "Prihlásenie", value: "/auth/prihlasenie", icon: <LoginIcon /> }
+    { label: "Prihlásenie", value: "/auth/prihlasenie", icon: <LoginIcon /> },
+    { label: "Podmienky", value: "/podmienky", icon: <HomeIcon /> },
+    { label: "O mne", value: "/o-mne", icon: <HomeIcon /> },
+    { label: "GDPR", value: "/gdpr", icon: <HomeIcon /> }
   ];
 
   // Authenticated navigation paths
   const authPaths = [
     { label: "Domov", value: "/", icon: <HomeIcon /> },
-    { label: "Hľadať", value: "/hladat", icon: <SearchIcon /> },
-    { label: "Pridať", value: "/prispevok", icon: <AddCircleIcon /> },
+    { label: "Hľadať", value: "/hladanie", icon: <SearchIcon /> },
+    { label: "Pridať", value: "/pridat", icon: <AddCircleIcon /> },
+    { label: "Prispevky", value: "/prispevok", icon: <HomeIcon /> },
+    { label: "Notifikacie", value: "/notifikacie", icon: <HomeIcon /> },
     {
       label: "Profil",
       value: "/profil",

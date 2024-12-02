@@ -4,7 +4,7 @@
 
 import Typography from "@mui/material/Typography";
 
-export const metadata = { title: "Hľadať | ZoškaSnap" };
+export const metadata = { title: "Hľadať | INSTAGRAM" };
 
 export default function Search() {
 

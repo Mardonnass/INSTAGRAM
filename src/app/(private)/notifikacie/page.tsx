@@ -2,13 +2,12 @@
 import Typography  from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 
+export const metadata = {title: "Notifikacie | INSTAGRAM "}
 
-export const metadata = {title: "Pridavanie Prispevkov| Insta"}
-
-export default function PostForm() {
+export default function Notifications() {
     return(
         <Container>
-            <Typography>Formular prispekov</Typography>
+            <Typography> Notifikacie </Typography>
         </Container>
     );
 }

@@ -4,13 +4,13 @@
 
 import Typography from "@mui/material/Typography";
 
-export const metadata = { title: "O nás | ZoškaSnap" };
+export const metadata = { title: "O mne | INSTAGRAM" };
 
 export default function AboutUs() {
 
   return (
 
-      <Typography> O nás </Typography>
+      <Typography> O mne </Typography>
 
   );
 }
