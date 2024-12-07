@@ -1,17 +1,11 @@
-import SessionWatchdog from "../../components/SessionWatchdog";
+"use client";
 
-export default function PrivateLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+import SessionWatchdog from "@/components/SessionWatchdog";
+
+export default function PrivateLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <body>
-        <SessionWatchdog>
-          {children} {/* Your app's main content */}
-        </SessionWatchdog>
-      </body>
-    </html>
+    <SessionWatchdog>
+      <div>{children}</div>
+    </SessionWatchdog>
   );
 }
