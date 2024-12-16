@@ -7,8 +7,8 @@ import AuthProvider from "../components/AuthProvider";
 import { ThemeProvider } from "@/components/ThemeProvider"
 
 export const metadata: Metadata = {
-  title: "JakubGram",
-  description: "Made by JakubPesko",
+  title: "INSTAGTAM",
+  description: "Made by PISTAHUDAK",
 };
 
 export default function RootLayout({
