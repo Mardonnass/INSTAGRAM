@@ -39,7 +39,7 @@ export default function AboutContent() {
               color: theme === 'dark' ? '#ffffff' : '#000000'
             }}
           >
-            O nás
+            O mne
           </Typography>
 
           <Typography 
@@ -50,7 +50,7 @@ export default function AboutContent() {
               marginBottom: 2
             }}
           >
-            Vitajte na stránkach ZoškaSnap! Sme hrdí na našu školu a komunitu na SPŠE Zochova 9 v Bratislave.
+            Vitajte na stránkach INSTAGRAM! Som hrdý na moju školu a komunitu na SPŠE Zochova 9 v Bratislave.
           </Typography>
 
           <Box 
