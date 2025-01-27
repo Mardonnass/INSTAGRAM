@@ -1,26 +1,18 @@
-// src/app/prispevok/[prispevokId]/page.tsx
 
 
-import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
+// src/app/prispevok/[id]/page.tsx
 
-export const metadata = { title: "Detail prispevku | INSTAGRAM" };
 
-export default function PostDetail({
-  params,
 
-}: {
-  params: {
-    prispevokId: string;
-  };
-}) {
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
 
+export const metadata = {title: 'Detail prispevku | ZoskaSnap'}
+
+export default function PostDetail() {
   return (
     <Container>
-      <Typography> Príspevok číslo: {params.prispevokId} </Typography>
+        <Typography>Detail prispevku</Typography>
     </Container>
-
-      
-
   );
 }

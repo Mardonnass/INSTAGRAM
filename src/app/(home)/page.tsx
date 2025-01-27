@@ -1,25 +1,27 @@
+// src/app/(home)/page.tsx
 
-// src/app/page.tsx
+"use client"; // Ensure this is a Client Component
 
-
-import { getServerSession } from "next-auth";
-import { authOptions } from "../api/auth/[...nextauth]/authOptions";
-import AuthHomeView from "../../sections/AuthHomeView";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 import NonAuthHomeView from "../../sections/NonAuthHomeView";
 
-export const metadata = { title: "Domov | INSTAGRAM" };
+export default function HomePage() {
+  const { data: session } = useSession();  // Get session state from NextAuth
+  const router = useRouter();  // Access router for navigation
 
-export default async function HomePage() {
-  try {
-    const session = await getServerSession(authOptions);
-
-    if (!session) {
-      return <NonAuthHomeView />;
+  useEffect(() => {
+    if (session) {
+      // If session exists, redirect to posts page
+      router.push("/prispevok");
     }
+  }, [session, router]);
 
-    return <AuthHomeView session={session} />;
-  } catch (error) {
-    console.error("Error fetching session:", error);
+  // If no session, show non-authenticated view
+  if (!session) {
     return <NonAuthHomeView />;
   }
+
+  return null;  // In case session exists but hasn't yet redirected
 }

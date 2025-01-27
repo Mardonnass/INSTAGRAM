@@ -1,16 +1,11 @@
+// /src/app/(private)/prispevok/page.tsx
 
-// src/app/prispevok/page.tsx
+// Custom imports
+import PostsView from '../../../sections/PostView'
 
+export const metadata = { title: "Príspevky | ZoškaSnap" };
 
-import Typography from "@mui/material/Typography";
+// Search Page
+const PostsPage = () => <PostsView />;
 
-export const metadata = { title: "Zoznam prispevkov | INSTAGRAM" };
-
-export default function PostsList() {
-
-  return (
-
-      <Typography> Zoznam prispevkov </Typography>
-
-  );
-}
+export default PostsPage;
