@@ -6,9 +6,13 @@ import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Divider from '@mui/material/Divider';
 import { useTheme as useNextTheme } from "next-themes";
+import dynamic from 'next/dynamic';
 
 export default function TermsContent() {
   const { theme } = useNextTheme();
+  const BackButton = dynamic(() => import("../../../components/BackButton"), {
+    ssr: false, // Ensures it's client-side only
+  });
 
   return (
     <Box sx={{ 
@@ -107,6 +111,7 @@ export default function TermsContent() {
           }}
         >
           Ďakujeme, že dodržiavate podmienky používania našej aplikácie.
+        <BackButton/>
         </Typography>
       </Paper>
     </Box>

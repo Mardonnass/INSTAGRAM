@@ -170,7 +170,7 @@ export default function SignUp() {
               href="/prihlasenie"
               onClick={(e) => {
                 e.preventDefault();
-                router.push('/prihlasenie');
+                router.push('prihlasenie');
               }}
               sx={{
                 color: theme === 'dark' ? '#90caf9' : '#1976d2',

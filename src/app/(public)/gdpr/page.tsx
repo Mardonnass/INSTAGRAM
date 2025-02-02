@@ -7,10 +7,18 @@ import Paper from '@mui/material/Paper';
 import Divider from '@mui/material/Divider';
 import { useTheme as useNextTheme } from "next-themes";
 import { useRouter } from 'next/navigation';
+import dynamic from 'next/dynamic';
+
+
+
+
 
 export default function GDPRContent() {
   const { theme } = useNextTheme();
   const router = useRouter();
+  const BackButton = dynamic(() => import("../../../components/BackButton"), {
+    ssr: false, // Ensures it's client-side only
+  });
 
   return (
     <Box sx={{ 
@@ -124,8 +132,10 @@ export default function GDPRContent() {
             Podmienkach používania
           </Box>
           .
+        <BackButton />
         </Typography>
       </Paper>
+      
     </Box>
   );
 }
