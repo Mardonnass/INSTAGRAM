@@ -7,8 +7,6 @@ import SearchIcon from "@mui/icons-material/Search";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import LoginIcon from "@mui/icons-material/Login";
 import AppRegistrationIcon from "@mui/icons-material/AppRegistration";
-import ArticleOutlinedIcon from "@mui/icons-material/ArticleOutlined";
-import GavelOutlinedIcon from "@mui/icons-material/GavelOutlined";
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import LogoutIcon from "@mui/icons-material/Logout";
 import InfoIcon from "@mui/icons-material/Info";
