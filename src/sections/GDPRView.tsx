@@ -1,6 +1,5 @@
 // src/app/(public)/gdpr/GDPRContent.tsx
-
-"use client"; // Ensure this is a Client Component
+"use client"
 
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
@@ -8,11 +7,18 @@ import Paper from '@mui/material/Paper';
 import Divider from '@mui/material/Divider';
 import { useTheme as useNextTheme } from "next-themes";
 import { useRouter } from 'next/navigation';
+import dynamic from 'next/dynamic';
+
+
+
 
 
 export default function GDPRContent() {
   const { theme } = useNextTheme();
   const router = useRouter();
+  const BackButton = dynamic(() => import("../components/BackButton"), {
+    ssr: false, // Ensures it's client-side only
+  });
 
   return (
     <Box sx={{ 
@@ -42,7 +48,7 @@ export default function GDPRContent() {
             marginBottom: 4
           }}
         >
-          Vitajte na stránke ZoskaGram
+          GDPR - Ochrana osobných údajov
         </Typography>
 
         <Typography 
@@ -50,13 +56,57 @@ export default function GDPRContent() {
           paragraph
           sx={{ 
             color: theme === 'dark' ? '#ffffff' : '#000000',
-            marginBottom: 2
+            marginBottom: 4
           }}
         >
-          Prezrite si rôzne príspevky od vašich spolužiakov, učiteľov či dokoca pána riaditeľa.
+          Vaša ochrana súkromia je pre nás veľmi dôležitá. V tomto dokumente sa dozviete, ako spracúvame a chránime vaše osobné údaje v súlade s nariadením GDPR.
         </Typography>
 
-        <Divider sx={{ marginY: 2 }} />
+        <Divider sx={{ marginY: 4 }} />
+
+        <Box sx={{ marginBottom: 4 }}>
+          <Typography 
+            variant="h5" 
+            gutterBottom
+            sx={{ 
+              color: theme === 'dark' ? '#90caf9' : '#1976d2',
+              marginBottom: 2
+            }}
+          >
+            Zodpovednosť
+          </Typography>
+          <Typography 
+            variant="body1"
+            sx={{ 
+              color: theme === 'dark' ? '#ffffff' : '#000000'
+            }}
+          >
+            Všetky osobné údaje, ktoré nám poskytnete, budú použité iba na účely, na ktoré boli poskytnuté.
+          </Typography>
+        </Box>
+
+        <Box sx={{ marginBottom: 4 }}>
+          <Typography 
+            variant="h5" 
+            gutterBottom
+            sx={{ 
+              color: theme === 'dark' ? '#90caf9' : '#1976d2',
+              marginBottom: 2
+            }}
+          >
+            Práva užívateľov
+          </Typography>
+          <Typography 
+            variant="body1"
+            sx={{ 
+              color: theme === 'dark' ? '#ffffff' : '#000000'
+            }}
+          >
+            Máte právo na prístup k svojim údajom, ich úpravu alebo vymazanie. Kontaktujte nás na emailovej adrese support@zoskasnap.sk.
+          </Typography>
+        </Box>
+
+        <Divider sx={{ marginY: 4 }} />
 
         <Typography 
           variant="body2" 
@@ -66,10 +116,10 @@ export default function GDPRContent() {
             fontStyle: 'italic'
           }}
         >
-          Neprihlásený požívateľ, prihláste sa {' '}
+          Viac informácií nájdete v našich{' '}
           <Box
             component="span"
-            onClick={() => router.push('/auth/prihlasenie')}
+            onClick={() => router.push('/podmienky')}
             sx={{
               color: theme === 'dark' ? '#90caf9' : '#1976d2',
               textDecoration: 'underline',
@@ -79,9 +129,10 @@ export default function GDPRContent() {
               }
             }}
           >
-            tu
+            Podmienkach používania
           </Box>
           .
+        <BackButton />
         </Typography>
       </Paper>
       
