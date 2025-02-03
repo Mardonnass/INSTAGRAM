@@ -34,9 +34,9 @@ export default function Navbar() {
     { label: "Domov", value: "/", icon: <HomeIcon /> },
     { label: "Registrácia", value: "/auth/registracia", icon: <AppRegistrationIcon /> },
     { label: "Prihlásenie", value: "/auth/prihlasenie", icon: <LoginIcon /> },
-    { label: "Podmienky", value: "/podmienky", icon: <ArticleOutlinedIcon /> },
+    // { label: "Podmienky", value: "/podmienky", icon: <ArticleOutlinedIcon /> },
     { label: "O mne", value: "/o-mne", icon: <InfoIcon /> },
-    { label: "GDPR", value: "/gdpr", icon: <GavelOutlinedIcon /> },
+    // { label: "GDPR", value: "/gdpr", icon: <GavelOutlinedIcon /> },
   ];
 
   // Authenticated navigation paths
