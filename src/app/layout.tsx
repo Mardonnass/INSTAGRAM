@@ -1,10 +1,8 @@
-// src/app/layout.tsx
-
 import { Metadata } from "next";
 import "./globals.css";
 import Navbar from "@/components/NavBar";
 import AuthProvider from "../components/AuthProvider";
-import { ThemeProvider } from "@/components/ThemeProvider"
+import ThemeProviderWrapper from "../components/ThemeProvider"; // Import your ThemeProviderWrapper
 
 export const metadata: Metadata = {
   title: "INSTAGTAM",
@@ -19,7 +17,7 @@ export default function RootLayout({
   return (
     <html lang="sk">
       <body style={{ overflow: 'hidden' }}>
-        <ThemeProvider>
+        <ThemeProviderWrapper> {/* Wrap the content with ThemeProviderWrapper */}
           <AuthProvider>
             <div style={{ 
               height: '100vh', 
@@ -37,7 +35,7 @@ export default function RootLayout({
               <Navbar />
             </div>
           </AuthProvider>
-        </ThemeProvider>
+        </ThemeProviderWrapper>
       </body>
     </html>
   );

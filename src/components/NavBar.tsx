@@ -1,136 +1,171 @@
 "use client";
 
 import * as React from "react";
-import { BottomNavigation, BottomNavigationAction, Box, Avatar, IconButton } from "@mui/material";
+import {
+  BottomNavigation,
+  BottomNavigationAction,
+  Box,
+  Avatar,
+  IconButton,
+  Menu,
+  MenuItem,
+  ListItemIcon,
+  ListItemText,
+} from "@mui/material";
 import HomeIcon from "@mui/icons-material/Home";
 import SearchIcon from "@mui/icons-material/Search";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import LoginIcon from "@mui/icons-material/Login";
+import AccessibilityIcon from "@mui/icons-material/Accessibility";
 import AppRegistrationIcon from "@mui/icons-material/AppRegistration";
-import NotificationsIcon from '@mui/icons-material/Notifications';
 import LogoutIcon from "@mui/icons-material/Logout";
-import InfoIcon from "@mui/icons-material/Info";
-import { useRouter } from "next/navigation";
-import { useSession } from "next-auth/react";
-import { useTheme } from "next-themes";
-import Brightness4Icon from "@mui/icons-material/Brightness4";
-import Brightness7Icon from "@mui/icons-material/Brightness7";
+import Brightness7Icon from "@mui/icons-material/Brightness7"; // Sun icon
+import Brightness4Icon from "@mui/icons-material/Brightness4"; // Moon icon
+import PersonIcon from "@mui/icons-material/Person";
+import { useRouter, usePathname } from "next/navigation";
+import { useSession, signOut } from "next-auth/react";
+import { useThemeToggle } from "../components/ThemeProvider";
 
 export default function Navbar() {
-  const [value, setValue] = React.useState("/");
   const router = useRouter();
+  const pathname = usePathname();
   const { data: session, status } = useSession();
-  const { theme, setTheme } = useTheme();
+  const toggleTheme = useThemeToggle(); // Theme toggle function
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
 
-  const handleNavigation = (event: React.SyntheticEvent, newValue: string) => {
-    setValue(newValue);
-    router.push(newValue);
+  // Load theme preference from localStorage on mount
+  const [isSun, setIsSun] = React.useState(true);
+
+  React.useEffect(() => {
+    if (typeof window !== "undefined") {
+      const savedTheme = localStorage.getItem("theme");
+      setIsSun(savedTheme !== "dark"); // Ensure consistency with stored theme
+    }
+  }, []);
+
+  // Toggle the sun/moon icon and theme mode
+  const handleThemeToggle = () => {
+    setIsSun((prev) => {
+      const newTheme = !prev;
+      localStorage.setItem("theme", newTheme ? "light" : "dark"); // Save the theme
+      return newTheme;
+    });
+    toggleTheme();
   };
 
-  // Non-authenticated navigation paths
+  const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleProfileClick = () => {
+    handleMenuClose();
+    router.push("/profil");
+  };
+
+  const handleLogoutClick = async () => {
+    handleMenuClose();
+    await signOut({ redirect: true, callbackUrl: "/" });
+  };
+
+  const handleNavigation = (_: React.SyntheticEvent, newValue: string) => {
+    if (
+      !session &&
+      newValue !== "/auth/registracia" &&
+      newValue !== "/auth/prihlasenie" &&
+      newValue !== "/" &&
+      newValue !== "/o-mne"
+    ) {
+      router.push("/auth/registracia");
+    } else {
+      router.push(newValue);
+    }
+  };
+
   const nonAuthPaths = [
     { label: "Domov", value: "/", icon: <HomeIcon /> },
+    { label: "O mne", value: "/o-mne", icon: <AccessibilityIcon /> },
     { label: "Registrácia", value: "/auth/registracia", icon: <AppRegistrationIcon /> },
     { label: "Prihlásenie", value: "/auth/prihlasenie", icon: <LoginIcon /> },
-    // { label: "Podmienky", value: "/podmienky", icon: <ArticleOutlinedIcon /> },
-    { label: "O mne", value: "/o-mne", icon: <InfoIcon /> },
-    // { label: "GDPR", value: "/gdpr", icon: <GavelOutlinedIcon /> },
   ];
 
-  // Authenticated navigation paths
   const authPaths = [
-    { label: "Domov", value: "/", icon: <HomeIcon /> },
+    { label: "Domov", value: "/prispevok", icon: <HomeIcon /> },
     { label: "Hľadať", value: "/hladanie", icon: <SearchIcon /> },
     { label: "Pridať", value: "/pridat", icon: <AddCircleIcon /> },
-    { label: "Notifikacie", value: "/notifikacie", icon: <NotificationsIcon /> },
     {
       label: "Profil",
-      value: "/profil",
-      icon: session?.user?.image ? (
-        <Avatar alt={session?.user?.name || "User"} src={session?.user?.image || undefined} />
-      ) : (
-        <Avatar>{session?.user?.name?.charAt(0) || "U"}</Avatar>
+      value: "",
+      icon: (
+        <IconButton
+          onClick={handleProfileMenuOpen}
+          size="small"
+          sx={{ ml: 2 }}
+          aria-controls={open ? 'profile-menu' : undefined}
+          aria-haspopup="true"
+          aria-expanded={open ? 'true' : undefined}
+        >
+          <Avatar alt={session?.user?.name || "User"} src={session?.user?.image || undefined}>
+            {!session?.user?.image && (session?.user?.name?.charAt(0) || "U")}
+          </Avatar>
+        </IconButton>
       ),
     },
-    { label: "Odhlásiť", value: "/auth/odhlasenie", icon: <LogoutIcon /> },
   ];
 
-  // Decide which paths to use based on authentication status
   const navigationPaths = status === "authenticated" ? authPaths : nonAuthPaths;
-
-  // Theme toggle button
-  const handleThemeToggle = () => {
-    setTheme(theme === "dark" ? "light" : "dark");
-  };
 
   return (
     <Box sx={{ width: "100%", position: "fixed", bottom: 0 }}>
-      <BottomNavigation
-        showLabels
-        value={value}
-        onChange={handleNavigation}
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          bgcolor: theme === "dark" ? "#1a1a1a" : "background.paper",
-          borderTop: theme === "dark" ? "1px solid rgba(255, 255, 255, 0.12)" : "1px solid rgba(0, 0, 0, 0.12)",
-        }}
-      >
+      <BottomNavigation showLabels value={pathname} onChange={handleNavigation}>
         {navigationPaths.map((path) => (
           <BottomNavigationAction
             key={path.value}
             label={path.label}
             value={path.value}
-            icon={React.cloneElement(path.icon, {
-              sx: {
-                color: value === path.value ? "rgba(0, 123, 255, 0.8)" : (theme === "dark" ? "lightgray" : "black"),  // Blue when active, otherwise gray/black
-                "&:hover": {
-                  color: "rgba(0, 123, 255, 0.8)",  // Opal blue on hover
-                },
-                transition: "color 0.3s",  // Smooth transition
-              },
-            })}
+            icon={path.icon}
             sx={{
-              color: value === path.value ? "rgba(0, 123, 255, 0.8)" : (theme === "dark" ? "lightgray" : "black"),  // Blue when active
-              "&:hover": {
-                color: "rgba(0, 123, 255, 0.8)",  // Opal blue icon on hover
-              },
-              transition: "color 0.3s",  // Smooth transition for icon
-              textAlign: "center",  // Ensure text and icon are aligned
-              "& .MuiBottomNavigationAction-label": {
-                transition: "color 0.3s",  // Smooth transition for text
-                color: value === path.value ? "rgba(0, 123, 255, 0.8)" : (theme === "dark" ? "lightgray" : "black"),  // Keep the text color in sync with the icon
-                "&:hover": {
-                  color: "rgba(0, 123, 255, 0.8)",  // Opal blue text on hover
-                },
-              },
+              color: pathname === path.value ? "blue" : "inherit",
             }}
           />
         ))}
-      </BottomNavigation>
-
-      {/* Theme Toggle Button */}
-      <Box
-        sx={{
-          position: "absolute",
-          right: "16px", // Move a bit from the right edge
-          top: "50%",
-          transform: "translateY(-50%)",
-          zIndex: 1, // Ensure it stays on top of the BottomNavigation
-        }}
-      >
+        {/* Sun/Moon Toggle */}
         <IconButton
           onClick={handleThemeToggle}
-          sx={{
-            color: theme === "dark" ? "#ffffff" : "#000000",
-            "&:hover": {
-              color: theme === "dark" ? "#ffffff" : "#000000",
-            },
-          }}
+          sx={{ position: "absolute", bottom: "10px", right: "10px" }}
+          color="inherit"
         >
-          {theme === "dark" ? <Brightness7Icon /> : <Brightness4Icon />}
+          {isSun ? <Brightness7Icon fontSize="large" /> : <Brightness4Icon fontSize="large" />}
         </IconButton>
-      </Box>
+      </BottomNavigation>
+
+      {/* Profile Menu */}
+      <Menu
+        anchorEl={anchorEl}
+        id="profile-menu"
+        open={open}
+        onClose={handleMenuClose}
+        onClick={handleMenuClose}
+        transformOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+        anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
+      >
+        <MenuItem onClick={handleProfileClick}>
+          <ListItemIcon>
+            <PersonIcon fontSize="small" />
+          </ListItemIcon>
+          <ListItemText>Moj profil</ListItemText>
+        </MenuItem>
+        <MenuItem onClick={handleLogoutClick}>
+          <ListItemIcon>
+            <LogoutIcon fontSize="small" />
+          </ListItemIcon>
+          <ListItemText>Odhlasit</ListItemText>
+        </MenuItem>
+      </Menu>
     </Box>
   );
 }

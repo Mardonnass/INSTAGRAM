@@ -1,22 +1,40 @@
-"use client"
+"use client";
 
-import { ThemeProvider as NextThemesProvider } from "next-themes"
-import { ReactNode, useState, useEffect } from "react"
+import React, { useState, useEffect, createContext, useContext } from "react";
+import { ThemeProvider, CssBaseline } from "@mui/material";
+import { lightTheme, darkTheme } from "../app/configs/theme";
 
-export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [mounted, setMounted] = useState(false)
+const ThemeToggleContext = createContext<() => void>(() => {});
+export const useThemeToggle = () => useContext(ThemeToggleContext);
 
+const ThemeProviderWrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  // Load theme from localStorage when the component mounts
   useEffect(() => {
-    setMounted(true)
-  }, [])
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme === "dark") {
+      setIsDarkMode(true);
+    }
+  }, []);
 
-  if (!mounted) {
-    return null
-  }
+  // Toggle theme and store the preference
+  const toggleTheme = () => {
+    setIsDarkMode((prev) => {
+      const newTheme = !prev;
+      localStorage.setItem("theme", newTheme ? "dark" : "light"); // Save preference
+      return newTheme;
+    });
+  };
 
   return (
-    <NextThemesProvider attribute="class" defaultTheme="system" enableSystem>
-      {children}
-    </NextThemesProvider>
-  )
-}
+    <ThemeToggleContext.Provider value={toggleTheme}>
+      <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
+        <CssBaseline />
+        {children}
+      </ThemeProvider>
+    </ThemeToggleContext.Provider>
+  );
+};
+
+export default ThemeProviderWrapper;

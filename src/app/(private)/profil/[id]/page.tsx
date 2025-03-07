@@ -1,15 +1,9 @@
 // src/app/profil/[id]/page.tsx
 
+import ProfileView from '../../../../sections/ProfileView';
 
-import Typography from "@mui/material/Typography";
+export const metadata = { title: 'Detail profilu | ZOSKASNAP'};
 
-export const metadata = { title: "Detail profilu | ZoškaSnap" };
-
-export default function ProfileDetail() {
-
-  return (
-
-      <Typography> Detail profilu </Typography>
-
-  );
+export default function ProfileDetail({ params }: { params: { id: string } }) {
+  return <ProfileView userId={params.id} />;
 }

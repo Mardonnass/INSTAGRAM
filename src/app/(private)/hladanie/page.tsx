@@ -1,16 +1,10 @@
 
 // src/app/hladat/page.tsx
 
+import SearchView from '../../../sections/SearchView';
 
-import Typography from "@mui/material/Typography";
+export const metadata = { title: 'Vyhladavanie | ZoskaSnap'};
 
-export const metadata = { title: "Hľadať | INSTAGRAM" };
-
-export default function Search() {
-
-  return (
-
-      <Typography> Hľadať </Typography>
-
-  );
+export default function SearchPage() {
+  return <SearchView />;
 }
