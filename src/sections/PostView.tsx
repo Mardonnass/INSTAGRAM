@@ -12,7 +12,7 @@ import IconButton from "@mui/material/IconButton";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 
-import { fetchPosts } from "@/app/actions/posts";
+import { fetchPosts } from "@/components/posts";
 
 interface Post {
   id: string;
